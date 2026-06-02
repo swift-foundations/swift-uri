@@ -18,7 +18,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(path: "../../swift-standards/swift-uri-standard"),
+        .package(url: "https://github.com/swift-standards/swift-uri-standard.git", branch: "main"),
     ],
     targets: [
         .target(
