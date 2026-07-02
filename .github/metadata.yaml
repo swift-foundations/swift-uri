@@ -1,6 +1,6 @@
 # .github/metadata.yaml
 # Triaged by AI-assisted bulk pass (2026-04-29).
-description: "URI for Swift."
+description: "A composed URI type spanning RFC 3986 and RFC 3987 for Swift."
 topics:
   - foundations
   - uri
