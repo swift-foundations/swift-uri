@@ -5,7 +5,5 @@
     @TitleHeading("Swift Foundations")
 }
 
-URI — umbrella catalog placeholder. Replace this line with a one-sentence
-description of what the package provides.
-
-## Topics
+``URI`` is the L3 umbrella module that re-exports `URI_Standard`, providing a
+parsed URI value type for Swift.
