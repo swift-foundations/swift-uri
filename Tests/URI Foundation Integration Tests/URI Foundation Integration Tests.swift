@@ -9,8 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
-import Testing
 import Foundation
+import Testing
 import URI
 @testable import URI_Foundation_Integration
 
@@ -97,6 +97,6 @@ extension `URI Foundation Integration Tests`.`Edge Case` {
     @Test
     func `an empty URLComponents bridges to the empty relative-reference URI`() throws {
         let uri = try URLComponents().uri()
-        #expect(uri.value == "")
+        #expect(uri.value.isEmpty)
     }
 }

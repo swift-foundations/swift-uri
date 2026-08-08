@@ -9,8 +9,8 @@
 //
 // ===----------------------------------------------------------------------===//
 
-public import URI
 public import Foundation
+public import URI
 
 extension URI {
     /// Bridges this RFC 3986 URI to Foundation `URLComponents`.
