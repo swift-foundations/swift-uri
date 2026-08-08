@@ -15,7 +15,11 @@ let package = Package(
         .library(
             name: "URI",
             targets: ["URI"]
-        )
+        ),
+        .library(
+            name: "URI Foundation Integration",
+            targets: ["URI Foundation Integration"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/swift-standards/swift-uri-standard.git", branch: "main"),
@@ -30,7 +34,20 @@ let package = Package(
         .testTarget(
             name: "URI Tests",
             dependencies: [
-                "URI",
+                .target(name: "URI"),
+            ]
+        ),
+        .target(
+            name: "URI Foundation Integration",
+            dependencies: [
+                .target(name: "URI"),
+            ]
+        ),
+        .testTarget(
+            name: "URI Foundation Integration Tests",
+            dependencies: [
+                .target(name: "URI"),
+                .target(name: "URI Foundation Integration"),
             ]
         ),
     ],
