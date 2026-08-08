@@ -17,11 +17,11 @@ extension URI {
     ///
     /// Foundation's `URL` is not a faithful RFC 3986 implementation: its parser
     /// is stricter in some places (for example some percent-encoding and empty
-    /// authority edge cases) and it may normalize the value it stores. This
-    /// conversion never silently normalizes on the caller's behalf — a value
-    /// that Foundation cannot represent throws
-    /// ``URI/Foundation/Error/notRepresentableInFoundation(value:)`` instead of
-    /// returning `nil` or a best-effort guess.
+    /// authority edge cases) and it may normalize the string representation it
+    /// stores. This non-strict conversion accepts Foundation's representation;
+    /// it throws
+    /// ``URI/Foundation/Error/notRepresentableInFoundation(value:)`` only when
+    /// Foundation rejects the value.
     ///
     /// To learn whether the produced `URL` round-trips back to an identical
     /// ``URI`` value string, use ``foundationURLRoundTripping()``.

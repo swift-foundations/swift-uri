@@ -60,32 +60,27 @@ extension `URI Foundation Integration Tests`.Unit {
 }
 
 extension `URI Foundation Integration Tests`.`Edge Case` {
-    /// Foundation's `URL`/`URLComponents` parsers resolve dot-segments and
-    /// otherwise normalize some syntactically valid RFC 3986 references. A
-    /// URI containing a dot-segment is expected to fail the strict
-    /// round-trip check even though the non-strict bridge succeeds — this
-    /// asserts the lossiness is surfaced as a typed error, never silently
-    /// accepted.
+    /// Foundation's `URL` implementation may normalize syntactically valid RFC
+    /// 3986 references differently across platforms. The non-strict bridge
+    /// accepts Foundation's representation; the strict bridge succeeds only
+    /// when that representation remains byte-identical.
     @Test
-    func `lossy round-trip is surfaced explicitly, not silently normalized`() throws {
+    func `strict URL bridge reports any mismatch accepted by the non-strict bridge`() throws {
         let uri = try URI("https://example.com/a/../b")
+        let foundationValue = try uri.foundationURL().absoluteString
 
-        // The non-strict bridge must not throw merely because of normalization.
-        _ = try uri.foundationURL()
-
-        // If Foundation normalized the value away from the original string,
-        // the strict entry point must surface that as a typed, explicit
-        // failure rather than silently accepting the mismatch. If Foundation
-        // happens not to normalize this particular string, the strict call
-        // succeeds and there is nothing to assert.
         do throws(URI.Foundation.Error) {
             let strict = try uri.foundationURLRoundTripping()
-            #expect(strict.absoluteString == uri.value)
+            #expect(foundationValue == uri.value)
+            #expect(strict.absoluteString == foundationValue)
         } catch {
-            guard case .lossyRoundTrip = error else {
+            guard case .lossyRoundTrip(let original, let roundTripped) = error else {
                 Issue.record("Expected .lossyRoundTrip, got \(error)")
                 return
             }
+            #expect(original == uri.value)
+            #expect(roundTripped == foundationValue)
+            #expect(roundTripped != original)
         }
     }
 

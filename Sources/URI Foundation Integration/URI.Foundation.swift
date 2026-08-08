@@ -24,8 +24,10 @@ extension URI {
     ///
     /// Foundation's URL types are **not** a faithful RFC 3986 implementation: they
     /// apply their own normalization and reject or reinterpret some syntactically
-    /// valid RFC 3986 references. Every conversion here is therefore explicit about
-    /// its failure mode rather than silently normalizing — see
-    /// ``URI/Foundation/Error`` and the `roundTrips` diagnostics on each bridge.
+    /// valid RFC 3986 references. The non-strict URI-to-Foundation conversions
+    /// accept Foundation's representation, including any normalization it
+    /// performs. Their `RoundTripping` variants additionally require byte-for-byte
+    /// fidelity and report normalization as
+    /// ``URI/Foundation/Error/lossyRoundTrip(original:roundTripped:)``.
     public enum Foundation {}
 }

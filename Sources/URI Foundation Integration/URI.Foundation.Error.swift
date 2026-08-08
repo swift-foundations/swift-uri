@@ -29,12 +29,11 @@ extension URI.Foundation {
 
         /// The conversion succeeded on both sides but did not round-trip:
         /// re-deriving a value string from the Foundation representation does not
-        /// equal the original ``URI`` value string. This is surfaced explicitly —
-        /// never silently accepted — because Foundation normalizes some URIs
-        /// (for example percent-encoding case, or dot-segment resolution) in ways
-        /// RFC 3986 treats as a different, merely equivalent, string. Callers that
-        /// need exact byte-for-byte fidelity should treat this as a failure;
-        /// callers that only need RFC-3986-equivalence may catch and ignore it.
+        /// equal the original ``URI`` value string. The `RoundTripping` conversions
+        /// surface this because Foundation normalizes some URIs (for example
+        /// percent-encoding case, or dot-segment resolution) in ways RFC 3986
+        /// treats as a different, merely equivalent, string. The non-strict
+        /// conversions intentionally accept Foundation's representation instead.
         case lossyRoundTrip(original: String, roundTripped: String)
     }
 }

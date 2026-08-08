@@ -18,7 +18,10 @@ extension URI {
     /// `URLComponents` is Foundation's component-wise URL model. Like `URL`, it
     /// is not a faithful RFC 3986 implementation and may reject or normalize
     /// syntactically valid RFC 3986 references (see ``foundationURL()``). This
-    /// conversion throws rather than normalizing silently.
+    /// non-strict conversion accepts Foundation's representation and throws
+    /// only when Foundation rejects the value. Use
+    /// ``foundationURLComponentsRoundTripping()`` when byte-for-byte fidelity
+    /// is required.
     public func foundationURLComponents() throws(URI.Foundation.Error) -> URLComponents {
         guard let components = URLComponents(string: value) else {
             throw .notRepresentableInFoundation(value: value)
