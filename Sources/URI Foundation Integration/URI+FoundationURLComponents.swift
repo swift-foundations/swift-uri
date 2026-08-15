@@ -34,7 +34,8 @@ extension URI {
     ///
     /// See ``foundationURLRoundTripping()`` for why this distinct entry point
     /// exists rather than always checking.
-    public func foundationURLComponentsRoundTripping() throws(URI.Foundation.Error) -> URLComponents {
+    public func foundationURLComponentsRoundTripping() throws(URI.Foundation.Error) -> URLComponents
+    {
         let components = try foundationURLComponents()
         guard let roundTripped = components.string, roundTripped == value else {
             throw .lossyRoundTrip(original: value, roundTripped: components.string ?? "")

@@ -12,6 +12,7 @@
 import Foundation
 import Testing
 import URI
+
 @testable import URI_Foundation_Integration
 
 @Suite
