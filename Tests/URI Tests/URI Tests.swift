@@ -30,7 +30,9 @@ extension `URI Tests`.Integration {
     /// (swift-uri-standard); this asserts it is reachable through the
     /// `@_exported` re-export when consuming `import URI` alone.
     @Test
-    func `canonical(host:) reaches the L2 law through the re-export`() throws(URI.Canonicalization.Error) {
+    func `canonical(host:) reaches the L2 law through the re-export`() throws(URI.Canonicalization
+        .Error)
+    {
         let uri = URI(unchecked: "https://example.com/path")
         let result = try uri.canonical(host: "canonical.com")
 
