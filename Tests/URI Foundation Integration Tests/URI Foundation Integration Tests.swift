@@ -1,14 +1,3 @@
-// ===----------------------------------------------------------------------===//
-//
-// This source file is part of the swift-uri open source project
-//
-// Copyright (c) 2026 Coen ten Thije Boonkkamp and the swift-uri project authors
-// Licensed under Apache License v2.0
-//
-// See LICENSE for license information
-//
-// ===----------------------------------------------------------------------===//
-
 import Foundation
 import Testing
 import URI
@@ -61,10 +50,7 @@ extension `URI Foundation Integration Tests`.Unit {
 }
 
 extension `URI Foundation Integration Tests`.`Edge Case` {
-    /// Foundation's `URL` implementation may normalize syntactically valid RFC
-    /// 3986 references differently across platforms. The non-strict bridge
-    /// accepts Foundation's representation; the strict bridge succeeds only
-    /// when that representation remains byte-identical.
+
     @Test
     func `strict URL bridge reports any mismatch accepted by the non-strict bridge`() throws {
         let uri = try URI("https://example.com/a/../b")
@@ -85,11 +71,6 @@ extension `URI Foundation Integration Tests`.`Edge Case` {
         }
     }
 
-    /// `URLComponents().string == ""`, which RFC 3986 treats as a valid
-    /// (empty) relative reference — so this is a success path, not a
-    /// failure path. The failure path is `.notRepresentableAsURI`, taken
-    /// whenever `.string` is `nil` (see the `guard let value = string` in
-    /// `URLComponents.uri()`).
     @Test
     func `an empty URLComponents bridges to the empty relative-reference URI`() throws {
         let uri = try URLComponents().uri()
